@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// Import the second file so we can navigate to it
+import 'package:flutter_demo/widgets_layout_demo.dart';
 import 'dart_demo_screen.dart';
 
 void main() {
@@ -35,12 +35,21 @@ class HomeScreen extends StatelessWidget {
           // The single list item requested
           ListTile(
             title: const Text("1. Dart Demo"),
-            leading: const Icon(Icons.code), // Optional: adds a little icon
+            leading: const Icon(Icons.code), 
             onTap: () {
-              // Navigate to the new screen defined in the other file
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const DartDemoScreen()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text("2. Widgets and layout"),
+            leading: const Icon(Icons.screen_share), 
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const WidgetsLayoutDemo()),
               );
             },
           ),
