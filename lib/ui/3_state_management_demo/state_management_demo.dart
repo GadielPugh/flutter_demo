@@ -23,15 +23,8 @@ class _StateManagementDemoState extends State<StateManagementDemo> {
     Colors.indigo, 
     Colors.lightBlueAccent];
 
-  int colorIndex = 0;
-  int textIndex = 0;
-
-  final text_list =[
-    'My', 
-    'First', 
-    'Application', 
-    'In', 
-    'Flutter'];
+  final colorIndexNotifier = ValueNotifier(0);
+  final numberNotifier = ValueNotifier<int>(1);
 
 
   @override
@@ -45,20 +38,31 @@ class _StateManagementDemoState extends State<StateManagementDemo> {
 
               const SizedBox(height: 16),
 
-            Container(
-              
-              color: colors_list[colorIndex],
-              width: 200,
-              height: 200,
+            ValueListenableBuilder(
+              valueListenable: colorIndexNotifier,
+              builder: (context, colorIndex, child) {
 
-              child: Center( 
-                child: Text(text_list[textIndex], style: TextStyle(fontSize: 24)), 
-                ),  
+                return Container(
+                  
+                  color: colors_list[colorIndex],
+                  width: 200,
+                  height: 200,
                 
-    
-
-
-             
+                  child: Center( 
+                    child: ValueListenableBuilder(
+                      valueListenable: numberNotifier,
+                      builder: (context, number, child) {
+                        return Text('$number', style: TextStyle(fontSize: 24));
+                      }
+                    ), 
+                    ),  
+                    
+                    
+                
+                
+                 
+                );
+              }
             ),
 
             
@@ -88,18 +92,14 @@ class _StateManagementDemoState extends State<StateManagementDemo> {
 
   void changeColor() {
 
-    setState(() {
-    colorIndex ++;
-      colorIndex = colorIndex % colors_list.length;
-    });
+    colorIndexNotifier.value++;
+    colorIndexNotifier.value = colorIndexNotifier.value % colors_list.length;
+
   }
 
   void changeText() {
+    numberNotifier.value++;
 
-    setState(() {
-    textIndex ++;
-      textIndex = textIndex % text_list.length;
-    });
   }
 
 }
