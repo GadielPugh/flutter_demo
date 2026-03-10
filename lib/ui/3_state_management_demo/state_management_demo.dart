@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/ui/3_state_management_demo/state_management_manager.dart';
 
 class StateManagementDemo extends StatefulWidget {
   const StateManagementDemo({super.key});
@@ -10,96 +9,54 @@ class StateManagementDemo extends StatefulWidget {
 }
 
 class _StateManagementDemoState extends State<StateManagementDemo> {
-  
-  final colors_list = [
-    Colors.teal, 
-    Colors.deepOrange, 
-    Colors.lightGreen, 
-    Colors.limeAccent, 
-    Colors.cyan, 
-    Colors.pinkAccent, 
-    Colors.amber, 
-    Colors.green, 
-    Colors.indigo, 
-    Colors.lightBlueAccent];
+  final manager = StateManagementManager();
 
-  final colorIndexNotifier = ValueNotifier(0);
-  final numberNotifier = ValueNotifier<int>(1);
+  @override
+  void initState() {
+    super.initState();
+    manager.init();
+  }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('State Management')),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-           children: [
-
-              const SizedBox(height: 16),
-
-            ValueListenableBuilder(
-              valueListenable: colorIndexNotifier,
-              builder: (context, colorIndex, child) {
-
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            ValueListenableBuilder<Color>(
+              valueListenable: manager.colorNotifier,
+              builder: (context, color, child) {
                 return Container(
-                  
-                  color: colors_list[colorIndex],
+                  color: color,
                   width: 200,
                   height: 200,
-                
-                  child: Center( 
+                  child: Center(
                     child: ValueListenableBuilder(
-                      valueListenable: numberNotifier,
-                      builder: (context, number, child) {
-                        return Text('$number', style: TextStyle(fontSize: 24));
-                      }
-                    ), 
-                    ),  
-                    
-                    
-                
-                
-                 
+                      valueListenable: manager.numberNotifier,
+                      builder: (context, value, child) {
+                        return Text('$value', style: TextStyle(fontSize: 50));
+                      },
+                    ),
+                  ),
                 );
-              }
+              },
             ),
-
-            
-            
-
-
-              const SizedBox(height: 16),
-
-            // Buttons for state
-
-            OutlinedButton(onPressed: changeColor, child: Text("Change Color")),
-
-              const SizedBox(height: 16),
-
-             OutlinedButton(onPressed: changeText, child: Text("Change Text")),
-
-           ],
-           ),
+            const SizedBox(height: 20),
+            OutlinedButton(
+              onPressed: manager.changeColor,
+              child: Text('Change color'),
+            ),
+            const SizedBox(height: 20),
+            OutlinedButton(
+              onPressed: manager.changeText,
+              child: Text('Change text'),
+            ),
+          ],
         ),
       ),
     );
   }
-
-
-
-
-
-  void changeColor() {
-
-    colorIndexNotifier.value++;
-    colorIndexNotifier.value = colorIndexNotifier.value % colors_list.length;
-
-  }
-
-  void changeText() {
-    numberNotifier.value++;
-
-  }
-
 }
