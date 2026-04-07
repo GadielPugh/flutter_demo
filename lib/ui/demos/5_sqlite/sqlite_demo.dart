@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class SqliteDemo extends StatelessWidget {
+class SqliteDemo extends StatefulWidget {
 
 
+  @override
+  State<SqliteDemo> createState() => _SqliteDemoState();
+}
+
+class _SqliteDemoState extends State<SqliteDemo> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
