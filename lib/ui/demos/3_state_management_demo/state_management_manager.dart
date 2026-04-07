@@ -29,19 +29,11 @@ class StateManagementManager {
     _colorIndex = _colorIndex % _colors.length;
     final color = _colors[_colorIndex];
     colorNotifier.value = color;
-
-    //TODO: save user color
     localStorage.setColor(color);
   }
 
   void changeText() {
     numberNotifier.value++;
-
-
-    //TODO: save number to local storage
     localStorage.setNumber(numberNotifier.value);
   }
 }
-
-
-// lOCAL STORAGE IT IS USE FOR USER PREFERENCE, LIKE COLOR APP. 
