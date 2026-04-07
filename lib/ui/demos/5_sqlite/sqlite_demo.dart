@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/services/service_locator.dart';
+import 'package:flutter_demo/ui/demos/5_sqlite/databse.dart';
 
 class SqliteDemo extends StatefulWidget {
 
@@ -8,7 +10,9 @@ class SqliteDemo extends StatefulWidget {
 }
 
 class _SqliteDemoState extends State<SqliteDemo> {
-  
+  final db = getIt<DatabaseHelper>();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,32 +20,43 @@ class _SqliteDemoState extends State<SqliteDemo> {
         title: const Text("2. Sqlite Demo"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      // Center aligns the scroll view in the middle of the screen
       body: Center(
-        // SingleChildScrollView ensures the content scrolls if the screen is too small
         child: SingleChildScrollView(
           child: Column(
-            // MainAxisSize.min ensures the column only takes up needed space
-            // so the Center widget can do its job vertically
+
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              ElevatedButton(onPressed: (){}, child: Text("Insert")),
+              ElevatedButton(onPressed: (){
+                final row = {
+                  DatabaseHelper.columnName: 'John', 
+                  DatabaseHelper.columnAge: 23,
+                };
+                db.insert(row);
+              }, child: Text("Insert")),
           
                  SizedBox(height: 16),
 
-              ElevatedButton(onPressed: (){}, child: Text("Query")),
+              ElevatedButton(onPressed: (){
+                final rows = await db.queryAllRows();
+                print(rows);
+              }, child: Text("Query")),
                  
                  SizedBox(height: 16),
 
               ElevatedButton(onPressed: (){
-                ;
-              }, child: Text("Delete")),
+                final row = {
+                  DatabaseHelper.columnId: 1, 
+                  DatabaseHelper.columnName: 'Johnathan', 
+                  DatabaseHelper.columnAge: 23,
+                };
+                db.update(row);
+              }, child: Text("Update")),
 
                  SizedBox(height: 16),
 
               ElevatedButton(onPressed: (){
-                ;
-              }, child: Text("Insert")),
+                db.delete(1);
+              }, child: Text("Delete")),
 
 
             ],
