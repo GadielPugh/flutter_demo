@@ -36,7 +36,8 @@ class _SqliteDemoState extends State<SqliteDemo> {
           
                  SizedBox(height: 16),
 
-              ElevatedButton(onPressed: (){
+              ElevatedButton(
+              onPressed: () async {
                 final rows = await db.queryAllRows();
                 print(rows);
               }, child: Text("Query")),
