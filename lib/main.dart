@@ -9,6 +9,8 @@ import 'package:flutter_demo/ui/demos/4_user_login/login_screen.dart';
 import 'package:flutter_demo/ui/demos/5_sqlite/databse.dart';
 import 'package:flutter_demo/ui/demos/5_sqlite/sqlite_demo.dart';
 import 'package:flutter_demo/ui/demos/6_networking/networking_demo.dart';
+import 'package:flutter_demo/ui/demos/7_testing/calculator_demo.dart';
+import 'package:flutter_demo/ui/demos/8_profiling/profiling_demo.dart';
 import 'package:flutter_demo/ui/settings/settings_screen.dart';
 import 'ui/demos/1_dart/dart_demo_screen.dart';
 
@@ -154,6 +156,31 @@ class HomeScreen extends StatelessWidget {
             },
           ),
 
+           ListTile(
+            title: const Text("7. Testing"),
+            leading: const Icon(Icons.code),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CalculatorDemo()),
+                
+              );
+            },
+          ),
+
+          ListTile(
+            title: const Text("8. Profiling"),
+            leading: const Icon(Icons.code),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfilingDemo()),
+                
+              );
+            },
+          ),
      
 
         ],

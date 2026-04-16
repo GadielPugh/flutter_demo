@@ -17,7 +17,7 @@ class NetworkingManager {
       final map = jsonDecode(jsonString);
 
       catNotifier.value = 'One euro = ${map['eur']['mnt'].toInt()} tugruk';
-    } on ClientException catch (e) {
+    } on ClientException catch(e) {
       catNotifier.value = 'Your internet has a problem';
     }
   }

@@ -37,7 +37,7 @@ class _NetworkingDemoState extends State<NetworkingDemo> {
 
 
             ElevatedButton(onPressed: (){
-              manager.postRequest()
+              manager.postRequest();
             }, child: Text('POST')),
           ],
         ),
