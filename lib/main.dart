@@ -11,6 +11,7 @@ import 'package:flutter_demo/ui/demos/5_sqlite/sqlite_demo.dart';
 import 'package:flutter_demo/ui/demos/6_networking/networking_demo.dart';
 import 'package:flutter_demo/ui/demos/7_testing/calculator_demo.dart';
 import 'package:flutter_demo/ui/demos/8_profiling/profiling_demo.dart';
+import 'package:flutter_demo/ui/demos/9_painting/painting_demo.dart';
 import 'package:flutter_demo/ui/settings/settings_screen.dart';
 import 'ui/demos/1_dart/dart_demo_screen.dart';
 
@@ -34,7 +35,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final appState = getIt<AppState>();
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,23 +54,23 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Home Screen"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-
-
       ),
 
       drawer: Drawer(
         child: ListView(
           children: [
             DrawerHeader(child: FlutterLogo()),
-            ListTile(title:Text('Settings'), 
-            onTap:(){
+            ListTile(
+              title: Text('Settings'),
+              onTap: () {
                 Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingsScreen()),
-              );
-            }
-            )
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -78,9 +78,6 @@ class HomeScreen extends StatelessWidget {
       // A ListView for your items
       body: ListView(
         children: [
-
-
-
           ListTile(
             title: const Text("1. Dart Demo"),
             leading: const Icon(Icons.code),
@@ -129,16 +126,13 @@ class HomeScreen extends StatelessWidget {
             },
           ),
 
-
           ListTile(
             title: const Text("5. SQLite"),
             leading: const Icon(Icons.code),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => SqliteDemo()),
-                
+                MaterialPageRoute(builder: (context) => SqliteDemo()),
               );
             },
           ),
@@ -149,22 +143,18 @@ class HomeScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const NetworkingDemo()),
-                
+                MaterialPageRoute(builder: (context) => const NetworkingDemo()),
               );
             },
           ),
 
-           ListTile(
+          ListTile(
             title: const Text("7. Testing"),
             leading: const Icon(Icons.code),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const CalculatorDemo()),
-                
+                MaterialPageRoute(builder: (context) => const CalculatorDemo()),
               );
             },
           ),
@@ -175,14 +165,34 @@ class HomeScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const ProfilingDemo()),
-                
+                MaterialPageRoute(builder: (context) => const ProfilingDemo()),
               );
             },
           ),
-     
 
+          ListTile(
+            title: const Text("9. Pianting"),
+            leading: const Icon(Icons.code),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PaintingDemo()),
+              );
+            },
+          ),
+
+          ListTile(
+            title: const Text("10. Media"),
+            leading: const Icon(Icons.code),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PaintingDemo()),
+              );
+            },
+          ),
+          
+          
         ],
       ),
     );
