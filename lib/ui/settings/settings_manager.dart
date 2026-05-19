@@ -17,7 +17,13 @@ class SettingsManager {
     }
   }
 
+ 
+
   void setTheme(ThemeMode theme) {
     appState.setThemeMode(theme);
   }
+  void setLanguage(Locale locale) {
+    appState.setLocale(locale);
+  }
+
 }

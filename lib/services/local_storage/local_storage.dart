@@ -7,6 +7,8 @@ class LocalStorage {
   static const _colorKey = 'color';
   static const _numberKey = 'number';
   static const _themeKey = 'theme';
+  static const _localeKey = 'locale';
+
 
   Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
@@ -51,4 +53,21 @@ class LocalStorage {
       await prefs.remove(_themeKey);
     }
   }
+
+  Locale getLocale(){
+    final languageCode =  prefs.getString(_localeKey);
+
+    if(languageCode == 'en'){
+      return Locale('en');
+    }else if(languageCode == 'es'){
+      return Locale('es');
+    }else{
+      return Locale('mn');
+    }
+  }
+
+  Future<void> setLocale(Locale locale) async {
+    await prefs.setString(_localeKey, locale.languageCode);
+  }
+
 }

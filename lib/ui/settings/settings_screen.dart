@@ -27,6 +27,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   final theme = await _showThemeDialog();
                 },
               ),
+
+              ListTile(
+                title: Text('App language'),
+                subtitle: Text("English"),
+                onTap: () async {
+                  await _showLanguageDialog();
+                },
+              ),
+
+
             ],
           ),
         );
@@ -35,6 +45,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   ThemeMode theme = ThemeMode.system;
+  Locale get currentLocale => manager.currentLocale
+
 
   Future<ThemeMode?> _showThemeDialog() async {
     return await showDialog(
@@ -52,6 +64,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
           selected: {manager.currentTheme},
           onSelectionChanged: (Set<ThemeMode> selection) {
             manager.setTheme(selection.first);
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
+    );
+  }
+
+  Future<ThemeMode?> _showLanguageDialog() async {
+    return await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: SegmentedButton<Locale>(
+          segments: [
+            ButtonSegment(value: Locale('en'), label: Text('English')),
+            ButtonSegment(value: Locale('es'), label: Text('Spanish')),
+            ButtonSegment(value: Locale('mn'), label: Text('Mongolian')),
+          ],
+          selected: {manager.currentLocale},
+          onSelectionChanged: (Set<Locale> selection) {
+            manager.setLanguage(selection.first);
             Navigator.of(context).pop();
           },
         ),
